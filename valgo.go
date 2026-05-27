@@ -19,43 +19,15 @@ package valgo
 // The Factory function accepts an options parameter of type [FactoryOptions]
 // struct, which allows you to specify options such as the default locale code,
 // available locales and a custom JSON marshaler for errors.
-func Factory(options FactoryOptions) *ValidationFactory {
+func Factory(options FactoryOptions) *ValidationFactory { _ = "STUB: not implemented"; return nil }
 
-	factory := &ValidationFactory{
-		localeCodeDefault: localeCodeDefault,
-		marshalJsonFunc:   options.MarshalJsonFunc,
-	}
+// Create factory locales for the case when locales was specified
 
-	if options.LocaleCodeDefault != "" {
-		factory.localeCodeDefault = options.LocaleCodeDefault
-	}
+// Add nonexisting locales
 
-	// Create factory locales for the case when locales was specified
-	if len(options.Locales) > 0 {
-		factory.locales = map[string]*Locale{
-			LocaleCodeEn: getLocaleEn().merge(options.Locales[LocaleCodeEn]),
-			LocaleCodeEs: getLocaleEs().merge(options.Locales[LocaleCodeEs]),
-		}
-
-		// Add nonexisting locales
-
-		// Determine what is the default locale, since an nonexisting locale,
-		// can't be created with an nonexisting default locale. In that case use
-		// the Valgo default locale as fallback
-		_localeCodeDefault := factory.localeCodeDefault
-		if _, exists := factory.locales[_localeCodeDefault]; !exists {
-			_localeCodeDefault = localeCodeDefault
-		}
-
-		for k, l := range options.Locales {
-			if _, exists := factory.locales[k]; !exists {
-				factory.locales[k] = factory.locales[_localeCodeDefault].merge(l)
-			}
-		}
-	}
-
-	return factory
-}
+// Determine what is the default locale, since an nonexisting locale,
+// can't be created with an nonexisting default locale. In that case use
+// the Valgo default locale as fallback
 
 // This function allows you to create a new [Validation] session without a
 // Validator. This is useful for conditional validation, reusing validation
@@ -67,10 +39,7 @@ func Factory(options FactoryOptions) *ValidationFactory {
 //
 // The following example conditionally adds a validator rule for the month_day
 // value.
-func New(options ...Options) *Validation {
-
-	return newValidation(options...)
-}
+func New(options ...Options) *Validation { _ = "STUB: not implemented"; return nil }
 
 // The [Is](...) function allows you to pass a [Validator] with the value and
 // the rules for validating it. At the same time, create a [Validation] session,
@@ -80,9 +49,7 @@ func New(options ...Options) *Validation {
 // the [Validator] for the full_name value. The function returns a [Validation]
 // session that allows us to add more Validators to validate more values; in the
 // example case the values age and status:
-func Is(validators ...Validator) *Validation {
-	return New().Is(validators...)
-}
+func Is(validators ...Validator) *Validation { _ = "STUB: not implemented"; return nil }
 
 // The [In](...) function executes one or more validators in a namespace, so the
 // value names in the error result are prefixed with this namespace. This is
@@ -91,9 +58,7 @@ func Is(validators ...Validator) *Validation {
 // In the following example we are validating the Person and the nested
 // Address structure. We can distinguish the errors of the nested Address
 // structure in the error results.
-func In(name string, v *Validation) *Validation {
-	return New().In(name, v)
-}
+func In(name string, v *Validation) *Validation { _ = "STUB: not implemented"; return nil }
 
 // The [InRow](...) function executes one or more validators in a namespace
 // similar to the [In](...) function, but with indexed namespace. So, the value
@@ -104,7 +69,8 @@ func In(name string, v *Validation) *Validation {
 // Addresses. The error results can distinguish the errors of the nested list
 // Addresses.
 func InRow(name string, index int, v *Validation) *Validation {
-	return New().InRow(name, index, v)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The [InCell](...) function executes one or more validators in an indexed
@@ -112,7 +78,8 @@ func InRow(name string, index int, v *Validation) *Validation {
 // slice). The value names in the error result are prefixed with this indexed
 // namespace.
 func InCell(name string, index int, v *Validation) *Validation {
-	return New().InCell(name, index, v)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The [Check](...) function is similar to the [Is](...) function, however with
@@ -123,9 +90,7 @@ func InCell(name string, index int, v *Validation) *Validation {
 // This example shows two rules that fail due to the empty value in the full_name
 // [Validator], and since the [Validator] is not short-circuited, both error
 // messages are added to the error result.
-func Check(validators ...Validator) *Validation {
-	return New().Check(validators...)
-}
+func Check(validators ...Validator) *Validation { _ = "STUB: not implemented"; return nil }
 
 // The [If](...) function is similar to [Merge](...), but merge the [Validation] session
 // only when the condition is true, and returns the same [Validation] instance.
@@ -133,29 +98,27 @@ func Check(validators ...Validator) *Validation {
 // instance is returned unchanged.
 //
 // See [Merge](...) for more information.
-func If(condition bool, _validation *Validation) *Validation {
-	return New().If(condition, _validation)
-}
+func If(condition bool, _validation *Validation) *Validation { _ = "STUB: not implemented"; return nil }
 
 // The [Do](...) function executes the given function with the current
 // [Validation] instance and returns the same instance.
 //
 // See [Validation.Do](...) for more information.
-func Do(function func(val *Validation)) *Validation {
-	return New().Do(function)
-}
+func Do(function func(val *Validation)) *Validation { _ = "STUB: not implemented"; return nil }
 
 // [When](...) executes the given function passing the [Validation] instance only
 // if the condition is true. When the condition is false, no operation is performed.
 //
 // See [Validation.When](...) for more information.
 func When(condition bool, function func(val *Validation)) *Validation {
-	return New().When(condition, function)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Create a new [Validation] session and add an error message to it without
 // executing a field validator. By adding this error message, the [Validation]
 // session will be marked as invalid.
 func AddErrorMessage(name string, message string) *Validation {
-	return New().AddErrorMessage(name, message)
+	_ = "STUB: not implemented"
+	return nil
 }

@@ -1,9 +1,5 @@
 package valgo
 
-import (
-	"reflect"
-)
-
 // The Any validator's type that keeps its validator context.
 type ValidatorAny struct {
 	context *ValidatorContext
@@ -19,26 +15,18 @@ type ValidatorAny struct {
 // When the name is provided but not the title, then the name is humanized to be
 // used as the title as well; for example the name phone_number will be
 // humanized as Phone Number.
-func Any(value any, nameAndTitle ...string) *ValidatorAny {
-	return &ValidatorAny{context: NewContext(value, nameAndTitle...)}
-}
+func Any(value any, nameAndTitle ...string) *ValidatorAny { _ = "STUB: not implemented"; return nil }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
-func (validator *ValidatorAny) Context() *ValidatorContext {
-	return validator.context
-}
+func (validator *ValidatorAny) Context() *ValidatorContext { _ = "STUB: not implemented"; return nil }
 
 // Invert the logical value associated with the next validator function.
 // For example:
 //
 //	// It will return false because `Not()` inverts the boolean value associated with the `Equal()` function
 //	Is(v.Any("a").Not().Equal("a")).Valid()
-func (validator *ValidatorAny) Not() *ValidatorAny {
-	validator.context.Not()
-
-	return validator
-}
+func (validator *ValidatorAny) Not() *ValidatorAny { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -50,11 +38,7 @@ func (validator *ValidatorAny) Not() *ValidatorAny {
 //	// This validator will pass because the string is equals "test".
 //	input := "test"
 //	isValid := v.Is(v.String(input).MinLength(5).Or().EqualTo("test")).Valid()
-func (validator *ValidatorAny) Or() *ValidatorAny {
-	validator.context.Or()
-
-	return validator
-}
+func (validator *ValidatorAny) Or() *ValidatorAny { _ = "STUB: not implemented"; return nil }
 
 // Validate if a value is equal to another. This function internally uses
 // the golang `==` operator.
@@ -66,13 +50,8 @@ func (validator *ValidatorAny) Or() *ValidatorAny {
 // DEPRECATED: 'any' is not safely comparable. Use the Comparable validator instead.
 // This function will be removed in Valgo v1.0.0.
 func (validator *ValidatorAny) EqualTo(value any, template ...string) *ValidatorAny {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value() == value
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value passes a custom function.
@@ -83,13 +62,8 @@ func (validator *ValidatorAny) EqualTo(value any, template ...string) *Validator
 //		return v == getNewStatus()
 //	})
 func (validator *ValidatorAny) Passing(function func(v any) bool, template ...string) *ValidatorAny {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value())
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value is nil.
@@ -98,16 +72,10 @@ func (validator *ValidatorAny) Passing(function func(v any) bool, template ...st
 //	var status *string
 //	Is(v.Any(status).Nil())
 func (validator *ValidatorAny) Nil(template ...string) *ValidatorAny {
-	validator.context.AddWithValue(
-		func() bool {
-			val := validator.context.Value()
-			// In Golang nil sometimes is not equal to raw nil, such as it's explained
-			// here: https://dev.to/arxeiss/in-go-nil-is-not-equal-to-nil-sometimes-jn8
-			// So, seems using reflection is the only option here
-			return val == nil ||
-				(reflect.ValueOf(val).Kind() == reflect.Ptr && reflect.ValueOf(val).IsNil())
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// In Golang nil sometimes is not equal to raw nil, such as it's explained
+// here: https://dev.to/arxeiss/in-go-nil-is-not-equal-to-nil-sometimes-jn8
+// So, seems using reflection is the only option here

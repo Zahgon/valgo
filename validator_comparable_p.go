@@ -1,9 +1,5 @@
 package valgo
 
-import (
-	"reflect"
-)
-
 // The Comparable validator's type that keeps its validator context.
 // T can be any Go type (pointer, struct, etc.) that is comparable.
 type ValidatorComparableP[T comparable] struct {
@@ -23,23 +19,26 @@ type ValidatorComparableP[T comparable] struct {
 //
 //	v.Is(v.Comparable(user).Not().Nil())
 func ComparableP[T comparable](value *T, nameAndTitle ...string) *ValidatorComparableP[T] {
-	return &ValidatorComparableP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorComparableP[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because `Not()` inverts the boolean value associated with `EqualTo()`
+	//	v.Is(v.Comparable("a").Not().EqualTo("a")).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because `Not()` inverts the boolean value associated with `EqualTo()`
-//	v.Is(v.Comparable("a").Not().EqualTo("a")).Valid()
 func (validator *ValidatorComparableP[T]) Not() *ValidatorComparableP[T] {
-	validator.context.Not()
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
@@ -53,8 +52,8 @@ func (validator *ValidatorComparableP[T]) Not() *ValidatorComparableP[T] {
 //	status := "running"
 //	isValid := v.Is(v.Comparable(status).EqualTo("paused").Or().EqualTo("running")).Valid()
 func (validator *ValidatorComparableP[T]) Or() *ValidatorComparableP[T] {
-	validator.context.Or()
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value is equal to another. This function internally uses
@@ -64,14 +63,8 @@ func (validator *ValidatorComparableP[T]) Or() *ValidatorComparableP[T] {
 //	status := "running"
 //	Is(v.Comparable(status).EqualTo("running"))
 func (validator *ValidatorComparableP[T]) EqualTo(value T, template ...string) *ValidatorComparableP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-
-			return validator.context.Value().(*T) != nil && *(validator.context.Value().(*T)) == value
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value passes a custom function.
@@ -87,15 +80,11 @@ func (validator *ValidatorComparableP[T]) EqualTo(value T, template ...string) *
 //	  }),
 //	).Valid()
 func (validator *ValidatorComparableP[T]) Passing(function func(v *T) bool, template ...string) *ValidatorComparableP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			// Value is stored as interface{} inside the context; assert back to *T.
-			return function(validator.context.Value().(*T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// Value is stored as interface{} inside the context; assert back to *T.
 
 // Validate if a value is nil.
 // Works for nil-able kinds: pointers, slices, maps, chans, funcs, and interfaces.
@@ -106,14 +95,8 @@ func (validator *ValidatorComparableP[T]) Passing(function func(v *T) bool, temp
 //	var s *string
 //	v.Is(v.Comparable(s).Nil())
 func (validator *ValidatorComparableP[T]) Nil(template ...string) *ValidatorComparableP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value() == nil ||
-				(reflect.ValueOf(validator.context.Value()).Kind() == reflect.Ptr && reflect.ValueOf(validator.context.Value()).IsNil())
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value is present in a slice.
@@ -123,20 +106,6 @@ func (validator *ValidatorComparableP[T]) Nil(template ...string) *ValidatorComp
 //	validStatus := []string{"idle", "paused", "stopped"}
 //	Is(v.Comparable(status).InSlice(validStatus))
 func (validator *ValidatorComparableP[T]) InSlice(slice []T, template ...string) *ValidatorComparableP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			if validator.context.Value().(*T) == nil {
-				return false
-			}
-			v := *(validator.context.Value().(*T))
-			for _, s := range slice {
-				if v == s {
-					return true
-				}
-			}
-			return false
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

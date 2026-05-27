@@ -19,36 +19,24 @@ type TypeNumber interface {
 		~float64
 }
 
-func isNumberEqualTo[T TypeNumber](v0 T, v1 T) bool {
-	return v0 == v1
-}
+func isNumberEqualTo[T TypeNumber](v0 T, v1 T) bool { _ = "STUB: not implemented"; return false }
 
-func isNumberGreaterThan[T TypeNumber](v0 T, v1 T) bool {
-	return v0 > v1
-}
+func isNumberGreaterThan[T TypeNumber](v0 T, v1 T) bool { _ = "STUB: not implemented"; return false }
+
 func isNumberGreaterOrEqualTo[T TypeNumber](v0 T, v1 T) bool {
-	return v0 >= v1
-}
-func isNumberLessThan[T TypeNumber](v0 T, v1 T) bool {
-	return v0 < v1
-}
-func isNumberLessOrEqualTo[T TypeNumber](v0 T, v1 T) bool {
-	return v0 <= v1
-}
-func isNumberBetween[T TypeNumber](v T, min T, max T) bool {
-	return v >= min && v <= max
-}
-func isNumberZero[T TypeNumber](v T) bool {
-	return v == 0
-}
-func isNumberInSlice[T TypeNumber](v T, slice []T) bool {
-	for _, _v := range slice {
-		if v == _v {
-			return true
-		}
-	}
+	_ = "STUB: not implemented"
 	return false
 }
+
+func isNumberLessThan[T TypeNumber](v0 T, v1 T) bool { _ = "STUB: not implemented"; return false }
+
+func isNumberLessOrEqualTo[T TypeNumber](v0 T, v1 T) bool { _ = "STUB: not implemented"; return false }
+
+func isNumberBetween[T TypeNumber](v T, min T, max T) bool { _ = "STUB: not implemented"; return false }
+
+func isNumberZero[T TypeNumber](v T) bool { _ = "STUB: not implemented"; return false }
+
+func isNumberInSlice[T TypeNumber](v T, slice []T) bool { _ = "STUB: not implemented"; return false }
 
 // The [ValidatorNumber] provides functions for setting validation rules for a
 // [TypeNumber] value type, or a custom type based on a [TypeNumber].
@@ -72,24 +60,26 @@ type ValidatorNumber[T TypeNumber] struct {
 // humanized as `Phone Number`
 
 func Number[T TypeNumber](value T, nameAndTitle ...string) *ValidatorNumber[T] {
-	return &ValidatorNumber[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorNumber[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because Not() inverts the boolean value associated with the Zero() function
+	//	Is(v.Number(0).Not().Zero()).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because Not() inverts the boolean value associated with the Zero() function
-//	Is(v.Number(0).Not().Zero()).Valid()
 func (validator *ValidatorNumber[T]) Not() *ValidatorNumber[T] {
-	validator.context.Not()
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
@@ -103,9 +93,8 @@ func (validator *ValidatorNumber[T]) Not() *ValidatorNumber[T] {
 //	input := 0
 //	isValid := v.Is(v.Number(input).GreaterThan(5).Or().Zero()).Valid()
 func (validator *ValidatorNumber[T]) Or() *ValidatorNumber[T] {
-	validator.context.Or()
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is equal to another. This function internally uses
@@ -115,13 +104,8 @@ func (validator *ValidatorNumber[T]) Or() *ValidatorNumber[T] {
 //	quantity := 2
 //	Is(v.Number(quantity).Equal(2))
 func (validator *ValidatorNumber[T]) EqualTo(value T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberEqualTo(validator.context.Value().(T), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than another. This function internally
@@ -131,13 +115,8 @@ func (validator *ValidatorNumber[T]) EqualTo(value T, template ...string) *Valid
 //	quantity := 3
 //	Is(v.Number(quantity).GreaterThan(2))
 func (validator *ValidatorNumber[T]) GreaterThan(value T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberGreaterThan(validator.context.Value().(T), value)
-		},
-		ErrorKeyGreaterThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than or equal to another. This function
@@ -147,13 +126,8 @@ func (validator *ValidatorNumber[T]) GreaterThan(value T, template ...string) *V
 //	quantity := 3
 //	Is(v.Number(quantity).GreaterOrEqualTo(3))
 func (validator *ValidatorNumber[T]) GreaterOrEqualTo(value T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberGreaterOrEqualTo(validator.context.Value().(T), value)
-		},
-		ErrorKeyGreaterOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than another. This function internally
@@ -163,13 +137,8 @@ func (validator *ValidatorNumber[T]) GreaterOrEqualTo(value T, template ...strin
 //	quantity := 2
 //	Is(v.Number(quantity).LessThan(3))
 func (validator *ValidatorNumber[T]) LessThan(value T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberLessThan(validator.context.Value().(T), value)
-		},
-		ErrorKeyLessThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than or equal to another. This function
@@ -179,13 +148,8 @@ func (validator *ValidatorNumber[T]) LessThan(value T, template ...string) *Vali
 //	quantity := 2
 //	Is(v.Number(quantity).LessOrEqualTo(2))
 func (validator *ValidatorNumber[T]) LessOrEqualTo(value T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberLessOrEqualTo(validator.context.Value().(T), value)
-		},
-		ErrorKeyLessOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is within a range (inclusive).
@@ -193,15 +157,8 @@ func (validator *ValidatorNumber[T]) LessOrEqualTo(value T, template ...string) 
 //
 //	Is(v.Number(3).Between(2,6))
 func (validator *ValidatorNumber[T]) Between(min T, max T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithParams(
-		func() bool {
-			return isNumberBetween(validator.context.Value().(T), min, max)
-		},
-		ErrorKeyBetween,
-		map[string]any{"title": validator.context.title, "min": min, "max": max, "value": validator.context.Value()},
-		template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is zero.
@@ -210,13 +167,8 @@ func (validator *ValidatorNumber[T]) Between(min T, max T, template ...string) *
 //
 //	Is(v.Number(0).Zero())
 func (validator *ValidatorNumber[T]) Zero(template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberZero(validator.context.Value().(T))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value passes a custom function.
@@ -227,13 +179,8 @@ func (validator *ValidatorNumber[T]) Zero(template ...string) *ValidatorNumber[T
 //		return v == getAllowedQuantity()
 //	})
 func (validator *ValidatorNumber[T]) Passing(function func(v T) bool, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is present in a numeric slice.
@@ -243,11 +190,6 @@ func (validator *ValidatorNumber[T]) Passing(function func(v T) bool, template .
 //	validQuantities := []int{1,3,5}
 //	Is(v.Number(quantity).InSlice(validQuantities))
 func (validator *ValidatorNumber[T]) InSlice(slice []T, template ...string) *ValidatorNumber[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberInSlice(validator.context.Value().(T), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

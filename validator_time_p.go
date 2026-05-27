@@ -18,13 +18,12 @@ type ValidatorTimeP struct {
 //	var myTime *time.Time
 //	v.TimeP(myTime, "start_time", "Start Time")
 func TimeP(value *time.Time, nameAndTitle ...string) *ValidatorTimeP {
-	return &ValidatorTimeP{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Context retrieves the context associated with the validator.
-func (validator *ValidatorTimeP) Context() *ValidatorContext {
-	return validator.context
-}
+func (validator *ValidatorTimeP) Context() *ValidatorContext { _ = "STUB: not implemented"; return nil }
 
 // Not negates the result of the next validator function in the chain.
 //
@@ -32,10 +31,7 @@ func (validator *ValidatorTimeP) Context() *ValidatorContext {
 //
 //	t := time.Now()
 //	Is(v.TimeP(&t).Not().Zero()).Valid()  // Will return false since t is not a zero time.
-func (validator *ValidatorTimeP) Not() *ValidatorTimeP {
-	validator.context.Not()
-	return validator
-}
+func (validator *ValidatorTimeP) Not() *ValidatorTimeP { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -47,10 +43,7 @@ func (validator *ValidatorTimeP) Not() *ValidatorTimeP {
 //	// This validator will pass because the time is before or equal to time.Now().
 //	t := time.Now()
 //	isValid := v.Is(v.TimeP(&t).Nil().Or().BeforeOrEqualTo(time.Now())).Valid()
-func (validator *ValidatorTimeP) Or() *ValidatorTimeP {
-	validator.context.Or()
-	return validator
-}
+func (validator *ValidatorTimeP) Or() *ValidatorTimeP { _ = "STUB: not implemented"; return nil }
 
 // EqualTo validates that the time pointer is equal to the specified time value.
 //
@@ -60,13 +53,8 @@ func (validator *ValidatorTimeP) Or() *ValidatorTimeP {
 //	t2 := t1
 //	Is(v.TimeP(&t1).EqualTo(t2)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) EqualTo(value time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeEqualTo(*(validator.context.Value().(*time.Time)), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // After validates that the time pointer is after the specified time value.
@@ -77,13 +65,8 @@ func (validator *ValidatorTimeP) EqualTo(value time.Time, template ...string) *V
 //	t2 := t1.Add(-time.Hour)
 //	Is(v.TimeP(&t1).After(t2)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) After(value time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeAfter(*(validator.context.Value().(*time.Time)), value)
-		},
-		ErrorKeyAfter, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // AfterOrEqualTo validates that the time pointer is after or equal to the specified time value.
@@ -94,13 +77,8 @@ func (validator *ValidatorTimeP) After(value time.Time, template ...string) *Val
 //	t2 := t1
 //	Is(v.TimeP(&t1).AfterOrEqualTo(t2)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) AfterOrEqualTo(value time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeAfterOrEqualTo(*(validator.context.Value().(*time.Time)), value)
-		},
-		ErrorKeyAfterOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Before validates that the time pointer is before the specified time value.
@@ -111,13 +89,8 @@ func (validator *ValidatorTimeP) AfterOrEqualTo(value time.Time, template ...str
 //	t2 := t1.Add(time.Hour)
 //	Is(v.TimeP(&t1).Before(t2)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) Before(value time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeBefore(*(validator.context.Value().(*time.Time)), value)
-		},
-		ErrorKeyBefore, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // BeforeOrEqualTo validates that the time pointer is before or equal to the specified time value.
@@ -128,13 +101,8 @@ func (validator *ValidatorTimeP) Before(value time.Time, template ...string) *Va
 //	t2 := t1
 //	Is(v.TimeP(&t1).BeforeOrEqualTo(t2)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) BeforeOrEqualTo(value time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeBeforeOrEqualTo(*(validator.context.Value().(*time.Time)), value)
-		},
-		ErrorKeyBeforeOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Between validates that the time pointer is between the specified minimum and maximum time values (inclusive).
@@ -146,15 +114,8 @@ func (validator *ValidatorTimeP) BeforeOrEqualTo(value time.Time, template ...st
 //	max := t1.Add(time.Hour)
 //	Is(v.TimeP(&t1).Between(min, max)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) Between(min time.Time, max time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithParams(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeBetween(*(validator.context.Value().(*time.Time)), min, max)
-		},
-		ErrorKeyBetween,
-		map[string]any{"title": validator.context.title, "min": min, "max": max},
-		template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Zero validates that the time pointer is pointing to a zero time value.
@@ -164,13 +125,8 @@ func (validator *ValidatorTimeP) Between(min time.Time, max time.Time, template 
 //	var t *time.Time
 //	Is(v.TimeP(t).Zero()).Valid()  // Will return true as t is nil and thus pointing to a zero time.
 func (validator *ValidatorTimeP) Zero(template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeZero(*(validator.context.Value().(*time.Time)))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Passing allows for custom validation function to be applied on the time pointer.
@@ -180,13 +136,8 @@ func (validator *ValidatorTimeP) Zero(template ...string) *ValidatorTimeP {
 //	t := time.Now()
 //	Is(v.TimeP(&t).Passing(func(v0 *time.Time) bool { return v0.After(time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)) })).Valid()  // Custom validation.
 func (validator *ValidatorTimeP) Passing(function func(v0 *time.Time) bool, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(*time.Time))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // InSlice validates that the time pointer is pointing to a time value present in the specified slice.
@@ -197,13 +148,8 @@ func (validator *ValidatorTimeP) Passing(function func(v0 *time.Time) bool, temp
 //	validTimes := []time.Time{t, time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)}
 //	Is(v.TimeP(&t).InSlice(validTimes)).Valid()  // Will return true.
 func (validator *ValidatorTimeP) InSlice(slice []time.Time, template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) != nil && isTimeInSlice(*(validator.context.Value().(*time.Time)), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Nil validates that the time pointer is nil.
@@ -213,13 +159,8 @@ func (validator *ValidatorTimeP) InSlice(slice []time.Time, template ...string) 
 //	var t *time.Time
 //	Is(v.TimeP(t).Nil()).Valid()  // Will return true as t is nil.
 func (validator *ValidatorTimeP) Nil(template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) == nil
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // NilOrZero validates that the time pointer is either nil or pointing to a zero time value.
@@ -229,12 +170,6 @@ func (validator *ValidatorTimeP) Nil(template ...string) *ValidatorTimeP {
 //	var t *time.Time
 //	Is(v.TimeP(t).NilOrZero()).Valid()  // Will return true as t is nil.
 func (validator *ValidatorTimeP) NilOrZero(template ...string) *ValidatorTimeP {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*time.Time) == nil || isTimeZero(*(validator.context.Value().(*time.Time)))
-
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

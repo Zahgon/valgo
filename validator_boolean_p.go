@@ -16,26 +16,25 @@ type ValidatorBoolP[T ~bool] struct {
 // title as well; for example the name `phone_number` will be humanized as
 // `Phone Number`
 func BoolP[T ~bool](value *T, nameAndTitle ...string) *ValidatorBoolP[T] {
-	return &ValidatorBoolP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorBoolP[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the boolean value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because Not() inverts the boolean value associated with the True() function
+	//	activated := true
+	//	Is(v.BoolP(&activated).Not().True()).Valid()
 }
 
-// Invert the boolean value associated with the next validator function.
-// For example:
-//
-//	// It will return false because Not() inverts the boolean value associated with the True() function
-//	activated := true
-//	Is(v.BoolP(&activated).Not().True()).Valid()
-func (validator *ValidatorBoolP[T]) Not() *ValidatorBoolP[T] {
-	validator.context.Not()
-
-	return validator
-}
+func (validator *ValidatorBoolP[T]) Not() *ValidatorBoolP[T] { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -47,11 +46,7 @@ func (validator *ValidatorBoolP[T]) Not() *ValidatorBoolP[T] {
 //	// This validator will pass because the input is equals false.
 //	input := true
 //	isValid := v.Is(v.BoolP(&input).Nil().Or().EqualTo(false)).Valid()
-func (validator *ValidatorBoolP[T]) Or() *ValidatorBoolP[T] {
-	validator.context.Or()
-
-	return validator
-}
+func (validator *ValidatorBoolP[T]) Or() *ValidatorBoolP[T] { _ = "STUB: not implemented"; return nil }
 
 // Validate if the value of a boolean pointer is equal to another value.
 // For example:
@@ -59,13 +54,8 @@ func (validator *ValidatorBoolP[T]) Or() *ValidatorBoolP[T] {
 //	activated := true
 //	Is(v.BoolP(&activated).Equal(true))
 func (validator *ValidatorBoolP[T]) EqualTo(value T, template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isBoolEqual(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if the value of a boolean pointer is true.
@@ -74,13 +64,8 @@ func (validator *ValidatorBoolP[T]) EqualTo(value T, template ...string) *Valida
 //	activated := true
 //	Is(v.BoolP(&activated).True())
 func (validator *ValidatorBoolP[T]) True(template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isBoolTrue(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyTrue, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if the value of a boolean pointer is false.
@@ -89,13 +74,8 @@ func (validator *ValidatorBoolP[T]) True(template ...string) *ValidatorBoolP[T] 
 //	activated := false
 //	Is(v.BoolP(&activated).False())
 func (validator *ValidatorBoolP[T]) False(template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isBoolFalse(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyFalse, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if the value of a boolean pointer is false or nil.
@@ -106,13 +86,8 @@ func (validator *ValidatorBoolP[T]) False(template ...string) *ValidatorBoolP[T]
 //	*activated = false
 //	Is(v.BoolP(activated).FalseOrNil())
 func (validator *ValidatorBoolP[T]) FalseOrNil(template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) == nil || isBoolFalse(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyFalse, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a boolean pointer is nil.
@@ -121,13 +96,8 @@ func (validator *ValidatorBoolP[T]) FalseOrNil(template ...string) *ValidatorBoo
 //	var activated *bool
 //	Is(v.BoolP(activated).Nil())
 func (validator *ValidatorBoolP[T]) Nil(template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) == nil
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a boolean pointer pass a custom function.
@@ -138,13 +108,8 @@ func (validator *ValidatorBoolP[T]) Nil(template ...string) *ValidatorBoolP[T] {
 //		return *v == someBoolFunction()
 //	})
 func (validator *ValidatorBoolP[T]) Passing(function func(v *T) bool, template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(*T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if the value of a boolean pointer is present in a boolean slice.
@@ -154,11 +119,6 @@ func (validator *ValidatorBoolP[T]) Passing(function func(v *T) bool, template .
 //	elements := []bool{true, false, true}
 //	Is(v.BoolP(&activated).InSlice(elements))
 func (validator *ValidatorBoolP[T]) InSlice(slice []T, template ...string) *ValidatorBoolP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isBoolInSlice(*(validator.context.Value().(*T)), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

@@ -17,7 +17,8 @@ type ValidatorUintP[T ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64] struct {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func UintP[T ~uint](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
-	return &ValidatorUintP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives an uint8 pointer value to validate.
@@ -31,7 +32,8 @@ func UintP[T ~uint](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Uint8P[T ~uint8](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
-	return &ValidatorUintP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives an uint16 pointer value to validate.
@@ -45,7 +47,8 @@ func Uint8P[T ~uint8](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Uint16P[T ~uint16](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
-	return &ValidatorUintP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives an uint32 pointer value to validate.
@@ -59,7 +62,8 @@ func Uint16P[T ~uint16](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Uint32P[T ~uint32](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
-	return &ValidatorUintP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives an uint64 pointer value to validate.
@@ -73,7 +77,8 @@ func Uint32P[T ~uint32](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Uint64P[T ~uint64](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
-	return &ValidatorUintP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives a byte pointer value to validate.
@@ -87,26 +92,25 @@ func Uint64P[T ~uint64](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func ByteP[T ~byte](value *T, nameAndTitle ...string) *ValidatorUintP[T] {
-	return &ValidatorUintP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorUintP[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because Not() inverts the boolean value associated with the Zero() function
+	//	n := uint(0)
+	//	Is(v.UintP(&n).Not().Zero()).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because Not() inverts the boolean value associated with the Zero() function
-//	n := uint(0)
-//	Is(v.UintP(&n).Not().Zero()).Valid()
-func (validator *ValidatorUintP[T]) Not() *ValidatorUintP[T] {
-	validator.context.Not()
-
-	return validator
-}
+func (validator *ValidatorUintP[T]) Not() *ValidatorUintP[T] { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -118,11 +122,7 @@ func (validator *ValidatorUintP[T]) Not() *ValidatorUintP[T] {
 //	// This validator will pass because the input is Zero.
 //	input := uint(0)
 //	isValid := v.Is(v.UintP(&input).GreaterThan(5).Or().Zero()).Valid()
-func (validator *ValidatorUintP[T]) Or() *ValidatorUintP[T] {
-	validator.context.Or()
-
-	return validator
-}
+func (validator *ValidatorUintP[T]) Or() *ValidatorUintP[T] { _ = "STUB: not implemented"; return nil }
 
 // Validate if a numeric value is equal to another. This function internally uses
 // the golang `==` operator.
@@ -131,13 +131,8 @@ func (validator *ValidatorUintP[T]) Or() *ValidatorUintP[T] {
 //	quantity := uint(2)
 //	Is(v.UintP(&quantity).EqualTo(2))
 func (validator *ValidatorUintP[T]) EqualTo(value T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberEqualTo(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than another. This function internally
@@ -147,13 +142,8 @@ func (validator *ValidatorUintP[T]) EqualTo(value T, template ...string) *Valida
 //	quantity := uint(3)
 //	Is(v.UintP(&quantity).GreaterThan(2))
 func (validator *ValidatorUintP[T]) GreaterThan(value T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberGreaterThan(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyGreaterThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than or equal to another. This function
@@ -163,13 +153,8 @@ func (validator *ValidatorUintP[T]) GreaterThan(value T, template ...string) *Va
 //	quantity := uint(3)
 //	Is(v.UintP(&quantity).GreaterOrEqualTo(3))
 func (validator *ValidatorUintP[T]) GreaterOrEqualTo(value T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberGreaterOrEqualTo(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyGreaterOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than another. This function internally
@@ -179,13 +164,8 @@ func (validator *ValidatorUintP[T]) GreaterOrEqualTo(value T, template ...string
 //	quantity := uint(2)
 //	Is(v.UintP(&quantity).LessThan(3))
 func (validator *ValidatorUintP[T]) LessThan(value T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberLessThan(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyLessThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than or equal to another. This function
@@ -195,13 +175,8 @@ func (validator *ValidatorUintP[T]) LessThan(value T, template ...string) *Valid
 //	quantity := uint(2)
 //	Is(v.UintP(&quantity).LessOrEqualTo(2))
 func (validator *ValidatorUintP[T]) LessOrEqualTo(value T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberLessOrEqualTo(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyLessOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is within a range (inclusive).
@@ -210,15 +185,8 @@ func (validator *ValidatorUintP[T]) LessOrEqualTo(value T, template ...string) *
 //	n := uint(3)
 //	Is(v.UintP(&n).Between(2,6))
 func (validator *ValidatorUintP[T]) Between(min T, max T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithParams(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberBetween(*(validator.context.Value().(*T)), min, max)
-		},
-		ErrorKeyBetween,
-		map[string]any{"title": validator.context.title, "min": min, "max": max, "value": validator.context.Value()},
-		template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is zero.
@@ -228,13 +196,8 @@ func (validator *ValidatorUintP[T]) Between(min T, max T, template ...string) *V
 //	n := uint(0)
 //	Is(v.UintP(&n).Zero())
 func (validator *ValidatorUintP[T]) Zero(template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberZero(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value passes a custom function.
@@ -245,13 +208,8 @@ func (validator *ValidatorUintP[T]) Zero(template ...string) *ValidatorUintP[T] 
 //		return *v == getAllowedQuantity()
 //	})
 func (validator *ValidatorUintP[T]) Passing(function func(v *T) bool, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(*T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is present in a numeric slice.
@@ -261,13 +219,8 @@ func (validator *ValidatorUintP[T]) Passing(function func(v *T) bool, template .
 //	validQuantities := []uint{1,3,5}
 //	Is(v.UintP(&quantity).InSlice(validQuantities))
 func (validator *ValidatorUintP[T]) InSlice(slice []T, template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberInSlice(*(validator.context.Value().(*T)), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is zero or nil.
@@ -280,13 +233,8 @@ func (validator *ValidatorUintP[T]) InSlice(slice []T, template ...string) *Vali
 //	var n *uint
 //	Is(v.UintP(n).ZeroOrNil())
 func (validator *ValidatorUintP[T]) ZeroOrNil(template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) == nil || isNumberZero(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric pointer value is nil.
@@ -296,11 +244,6 @@ func (validator *ValidatorUintP[T]) ZeroOrNil(template ...string) *ValidatorUint
 //	var n *uint
 //	Is(v.UintP(n).Nil())
 func (validator *ValidatorUintP[T]) Nil(template ...string) *ValidatorUintP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) == nil
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

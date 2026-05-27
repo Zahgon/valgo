@@ -1,11 +1,5 @@
 package valgo
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
-
 // The [Validation] session in Valgo is the main structure for validating one or
 // more values. It is called Validation in code.
 //
@@ -61,10 +55,8 @@ type Options struct {
 
 // Add one or more validators to a [Validation] session.
 func (validation *Validation) Is(validators ...Validator) *Validation {
-	for _, v := range validators {
-		validation = v.Context().validateIs(validation)
-	}
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // [If](...) is similar to [Merge](...), but merge the [Validation] session
@@ -76,10 +68,8 @@ func (validation *Validation) Is(validators ...Validator) *Validation {
 //
 //	v.If(isAdmin, v.Is(v.String(username, "username").Not().Blank()) )
 func (validation *Validation) If(condition bool, _validation *Validation) *Validation {
-	if condition {
-		return validation.merge("", _validation)
-	}
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The [Do](...) function executes the given function with the current
@@ -94,8 +84,8 @@ func (validation *Validation) If(condition bool, _validation *Validation) *Valid
 //		}
 //	})
 func (validation *Validation) Do(function func(val *Validation)) *Validation {
-	function(validation)
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // [When](...) is similar to [Do](...), but executes the given function
@@ -109,19 +99,15 @@ func (validation *Validation) Do(function func(val *Validation)) *Validation {
 //		val.Is(v.String(role, "role").Equal("admin"))
 //	})
 func (validation *Validation) When(condition bool, function func(val *Validation)) *Validation {
-	if condition {
-		function(validation)
-	}
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // [Check](...) adds one or more validators to a [Validation] session. But unlike [Is()],
 // the validators are not short-circuited.
 func (validation *Validation) Check(validators ...Validator) *Validation {
-	for _, v := range validators {
-		validation = v.Context().validateCheck(validation)
-	}
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // A [Validation] session provides this function which returns either true if
@@ -130,18 +116,18 @@ func (validation *Validation) Check(validators ...Validator) *Validation {
 // In the following example, even though the [Validator] for age is valid, the
 // [Validator] for status is invalid, making the entire Validator session
 // invalid.
-func (validation *Validation) Valid() bool {
-	return validation.valid
-}
+func (validation *Validation) Valid() bool { _ = "STUB: not implemented"; return false }
 
 // Add a map namespace to a [Validation] session.
 func (validation *Validation) In(name string, _validation *Validation) *Validation {
-	return validation.merge(name, _validation)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Add an indexed namespace to a [Validation] session.
 func (validation *Validation) InRow(name string, index int, _validation *Validation) *Validation {
-	return validation.merge(fmt.Sprintf("%s[%v]", name, index), _validation)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Add an indexed namespace to a [Validation] session where the target is a
@@ -154,22 +140,8 @@ func (validation *Validation) InRow(name string, index int, _validation *Validat
 //
 // The example above validates the value at tag_priority[0].
 func (validation *Validation) InCell(name string, index int, _validation *Validation) *Validation {
-
-	fieldName := fmt.Sprintf("%s[%v]", name, index)
-
-	for _, _err := range _validation.Errors() {
-		for _, _errMsg := range _err.Messages() {
-			if err, ok := validation.Errors()[fieldName]; ok {
-				for _, errMsg := range err.Messages() {
-					if _errMsg == errMsg {
-						continue
-					}
-				}
-			}
-			validation.AddErrorMessage(fieldName, _errMsg)
-		}
-	}
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Using [Merge](...) you can merge two [Validation] sessions. When two
@@ -181,83 +153,38 @@ func (validation *Validation) InCell(name string, index int, _validation *Valida
 // with the name status, the error returned will return two error messages, and
 // without duplicate the Not().Blank() error message rule.
 func (validation *Validation) Merge(_validation *Validation) *Validation {
-	return validation.merge("", _validation)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (validation *Validation) merge(prefix string, _validation *Validation) *Validation {
-
-	var _prefix string
-	if len(strings.TrimSpace(prefix)) > 0 {
-		_prefix = prefix + "."
-	}
-
-LOOP1:
-	for _field, _err := range _validation.Errors() {
-		for field, err := range validation.Errors() {
-			if _prefix+_field == field {
-			LOOP2:
-				for _, _errMsg := range _err.Messages() {
-					for _, errMsg := range err.Messages() {
-						if _errMsg == errMsg {
-							continue LOOP2
-						}
-					}
-					validation.AddErrorMessage(_prefix+_field, _errMsg)
-				}
-				continue LOOP1
-			}
-		}
-		for _, _errMsg := range _err.Messages() {
-			validation.AddErrorMessage(_prefix+_field, _errMsg)
-		}
-	}
-	return validation
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Add an error message to the [Validation] session without executing a field
 // validator. By adding this error message, the [Validation] session will be
 // marked as invalid.
 func (v *Validation) AddErrorMessage(name string, message string) *Validation {
-	v.valid = false
-
-	ev := v.getOrCreateValueError(name, nil)
-
-	ev.errorMessages = append(ev.errorMessages, message)
-
-	return v
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (v *Validation) mergeError(prefix string, err *Error) *Validation {
-
-	if err != nil && len(err.errors) > 0 {
-		v.valid = false
-
-		var _prefix string
-		if len(strings.TrimSpace(prefix)) > 0 {
-			_prefix = prefix + "."
-		}
-
-		for name, _ev := range err.errors {
-			for _, message := range _ev.Messages() {
-				v.AddErrorMessage(_prefix+name, message)
-			}
-		}
-	}
-
-	return v
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MergeError allows merging Valgo errors from an already validated [Validation] session.
 // The function takes an Valgo [Error] pointer as an argument and returns a [Validation] pointer.
-func (v *Validation) MergeError(err *Error) *Validation {
-	return v.mergeError("", err)
-}
+func (v *Validation) MergeError(err *Error) *Validation { _ = "STUB: not implemented"; return nil }
 
 // MergeErrorIn allows merging Valgo errors from already validated [Validation] sessions
 // within a map namespace. The function takes a namespace name and an [Error] pointer
 // as arguments and returns a [Validation] pointer.
 func (v *Validation) MergeErrorIn(name string, err *Error) *Validation {
-	return v.mergeError(name, err)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MergeErrorInRow allows merging Valgo errors from already validated [Validation] sessions
@@ -268,7 +195,8 @@ func (v *Validation) MergeErrorIn(name string, err *Error) *Validation {
 // The MergeErrorInIndex() method is a generic name to cover errors added by
 // InRow() and InCell() validations.
 func (v *Validation) MergeErrorInRow(name string, index int, err *Error) *Validation {
-	return v.mergeError(fmt.Sprintf("%s[%v]", name, index), err)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MergeErrorInRow allows merging Valgo errors from already validated [Validation] sessions
@@ -276,45 +204,18 @@ func (v *Validation) MergeErrorInRow(name string, index int, err *Error) *Valida
 // The function takes a namespace name, an index, and an [Error] pointer
 // as arguments and returns a [Validation] pointer.
 func (v *Validation) MergeErrorInIndex(name string, index int, err *Error) *Validation {
-	return v.mergeError(fmt.Sprintf("%s[%v]", name, index), err)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (validation *Validation) invalidate(name *string, title *string, fragment *validatorFragment) {
-	validation.valid = false
-
-	var _name string
-	if name == nil {
-		_name = concatString("value_", strconv.Itoa(validation.currentIndex-1))
-	} else {
-		_name = *name
-	}
-
-	ev := validation.getOrCreateValueError(_name, title)
-
-	errorKey := fragment.errorKey
-
-	if !fragment.boolOperation {
-		errorKey = concatString("not_", errorKey)
-	}
-
-	if _, ok := ev.errorTemplates[errorKey]; !ok {
-		ev.errorTemplates[errorKey] = &errorTemplate{
-			key: errorKey,
-		}
-	}
-
-	et := ev.errorTemplates[errorKey]
-	if len(fragment.template) > 0 {
-		et.template = &fragment.template[0]
-	}
-	et.params = fragment.templateParams
+	_ = "STUB: not implemented"
+	return
 }
 
 // Return a map with the information for each invalid field validator
 // in the Validation session.
-func (session *Validation) Errors() map[string]*valueError {
-	return session.errors
-}
+func (session *Validation) Errors() map[string]*valueError { _ = "STUB: not implemented"; return nil }
 
 // Error returns the validation errors as a standard Go error interface.
 //
@@ -325,7 +226,8 @@ func (session *Validation) Errors() map[string]*valueError {
 // Use ToError() for standard error handling or ToValgoError() for detailed
 // validation error information.
 func (validation *Validation) Error(marshalJsonFun ...func(e *Error) ([]byte, error)) error {
-	return validation.ToError(marshalJsonFun...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ToError returns the validation errors as a standard Go error interface.
@@ -346,13 +248,11 @@ func (validation *Validation) Error(marshalJsonFun ...func(e *Error) ([]byte, er
 // validation errors are serialized into JSON. If no function is provided,
 // a default marshaling behavior is used.
 func (validation *Validation) ToError(marshalJsonFun ...func(e *Error) ([]byte, error)) error {
+	_ = "STUB: not implemented"
 	// We cannot simply return validation.ToValgoError(marshalJsonFun...) because
 	// when ToValgoError returns nil, it's a nil *Error (concrete type), not a nil
 	// error interface. This causes issues with error checking functions like
 	// assert.NoError() which expect a proper nil error interface.
-	if err := validation.ToValgoError(marshalJsonFun...); err != nil {
-		return err
-	}
 	return nil
 }
 
@@ -377,83 +277,27 @@ func (validation *Validation) ToError(marshalJsonFun ...func(e *Error) ([]byte, 
 // validation errors are serialized into JSON. If no function is provided,
 // a default marshaling behavior is used.
 func (validation *Validation) ToValgoError(marshalJsonFun ...func(e *Error) ([]byte, error)) *Error {
-	if !validation.valid {
-		fn := validation.marshalJsonFunc
-		if len(marshalJsonFun) > 0 {
-			fn = marshalJsonFun[0]
-		}
-		return &Error{
-			errors:          validation.errors,
-			marshalJsonFunc: fn,
-		}
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // Return true if a specific field validator is valid.
-func (validation *Validation) IsValid(name string) bool {
-	if _, isNotValid := validation.invalidateMap[name]; isNotValid {
-		return false
-	}
-
-	return true
-}
+func (validation *Validation) IsValid(name string) bool { _ = "STUB: not implemented"; return false }
 
 func (validation *Validation) getOrCreateValueError(name string, title *string) *valueError {
-	if validation.errors == nil {
-		validation.errors = map[string]*valueError{}
-		validation.invalidateMap = map[string]bool{}
-	}
-
-	if _, ok := validation.errors[name]; !ok {
-		validation.addInvalidationNamespaces(name)
-		validation.errors[name] = &valueError{
-			name:           &name,
-			title:          title,
-			errorTemplates: map[string]*errorTemplate{},
-			errorMessages:  []string{},
-			validator:      validation,
-		}
-	}
-
-	ev := validation.errors[name]
-	ev.dirty = true
-
-	return ev
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func newValidation(options ...Options) *Validation {
-	v := &Validation{
-		valid: true,
-	}
+func newValidation(options ...Options) *Validation { _ = "STUB: not implemented"; return nil }
 
-	if len(options) == 0 {
-		v._locale = getLocale(localeCodeDefault)
-	} else {
-		_options := options[0]
+// If the factory has default locale specified, we try to use it as fallback
 
-		// If the factory has default locale specified, we try to use it as fallback
-		if options[0].localeCodeDefaultFromFactory != "" {
-			// Skipping default option will return nil, so we can use the factory
-			// locale default
-			v._locale = getLocaleAndSkipDefaultOption(_options.LocaleCode, options[0].localesFromFactory)
-			if v._locale == nil {
-				v._locale = getLocale(options[0].localeCodeDefaultFromFactory, options[0].localesFromFactory)
-			}
-		} else {
-			v._locale = getLocale(_options.LocaleCode, options[0].localesFromFactory)
-		}
+// Skipping default option will return nil, so we can use the factory
+// locale default
 
-		// If locale entries were specified, then we merge it with the calculated
-		// Locale from the options localeCode
-		if _options.Locale != nil {
-			v._locale.merge(_options.Locale)
-		}
-		v.marshalJsonFunc = _options.MarshalJsonFunc
-	}
-
-	return v
-}
+// If locale entries were specified, then we merge it with the calculated
+// Locale from the options localeCode
 
 // name examples:
 //
@@ -466,33 +310,16 @@ func newValidation(options ...Options) *Validation {
 //	"object.users[1]"
 //	"object.users[1].value"
 func (validation *Validation) addInvalidationNamespaces(name string) {
-	if name == "" {
-		return
-	}
-
-	segStart := 0 // start index of current segment (after last '.')
-	bracketAdded := false
-
-	for i := 0; i < len(name); i++ {
-		switch name[i] {
-		case '[':
-			// First '[' in this segment: add prefix without the index.
-			// e.g. "object.users[1]" -> add "object.users".
-			if !bracketAdded && i > segStart {
-				bracketAdded = true
-				validation.invalidateMap[name[:i]] = true
-			}
-		case '.':
-			// End of segment: add prefix up to this dot.
-			// e.g. "object.users[1].value" at '.' after "[1]" -> add "object.users[1]".
-			if i > 0 {
-				validation.invalidateMap[name[:i]] = true
-			}
-			segStart = i + 1
-			bracketAdded = false
-		}
-	}
-
-	// Always add the full path
-	validation.invalidateMap[name] = true
+	_ = "STUB: not implemented"
+	return
 }
+
+// start index of current segment (after last '.')
+
+// First '[' in this segment: add prefix without the index.
+// e.g. "object.users[1]" -> add "object.users".
+
+// End of segment: add prefix up to this dot.
+// e.g. "object.users[1].value" at '.' after "[1]" -> add "object.users[1]".
+
+// Always add the full path

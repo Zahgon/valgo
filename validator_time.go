@@ -4,42 +4,27 @@ import (
 	"time"
 )
 
-func isTimeEqualTo(v0 time.Time, v1 time.Time) bool {
-	return v0.Equal(v1)
-}
+func isTimeEqualTo(v0 time.Time, v1 time.Time) bool { _ = "STUB: not implemented"; return false }
 
-func isTimeAfter(v0 time.Time, v1 time.Time) bool {
-	return v0.After(v1)
-}
+func isTimeAfter(v0 time.Time, v1 time.Time) bool { _ = "STUB: not implemented"; return false }
 
-func isTimeAfterOrEqualTo(v0 time.Time, v1 time.Time) bool {
-	return v0.After(v1) || v0.Equal(v1)
-}
+func isTimeAfterOrEqualTo(v0 time.Time, v1 time.Time) bool { _ = "STUB: not implemented"; return false }
 
-func isTimeBefore(v0 time.Time, v1 time.Time) bool {
-	return v0.Before(v1)
-}
+func isTimeBefore(v0 time.Time, v1 time.Time) bool { _ = "STUB: not implemented"; return false }
 
 func isTimeBeforeOrEqualTo(v0 time.Time, v1 time.Time) bool {
-	return v0.Before(v1) || v0.Equal(v1)
-}
-
-func isTimeZero(v time.Time) bool {
-	return v.IsZero()
-}
-
-func isTimeBetween(v time.Time, min time.Time, max time.Time) bool {
-	return (v.After(min) || v.Equal(min)) && (v.Before(max) || v.Equal(max))
-}
-
-func isTimeInSlice(v time.Time, slice []time.Time) bool {
-	for _, _v := range slice {
-		if v.Equal(_v) {
-			return true
-		}
-	}
+	_ = "STUB: not implemented"
 	return false
 }
+
+func isTimeZero(v time.Time) bool { _ = "STUB: not implemented"; return false }
+
+func isTimeBetween(v time.Time, min time.Time, max time.Time) bool {
+	_ = "STUB: not implemented"
+	return false
+}
+
+func isTimeInSlice(v time.Time, slice []time.Time) bool { _ = "STUB: not implemented"; return false }
 
 // The `ValidatorTime` structure provides a set of methods to perform validation
 // checks on time.Time values, utilizing Go's native time package.
@@ -58,14 +43,13 @@ type ValidatorTime struct {
 //	v := ValidatorTime{}
 //	v.Time(startTime, "start_time", "Start Time")
 func Time(value time.Time, nameAndTitle ...string) *ValidatorTime {
-	return &ValidatorTime{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The Context method returns the current context of the validator, which can
 // be utilized to create custom validations by extending this validator.
-func (validator *ValidatorTime) Context() *ValidatorContext {
-	return validator.context
-}
+func (validator *ValidatorTime) Context() *ValidatorContext { _ = "STUB: not implemented"; return nil }
 
 // The Not method inverts the boolean value associated with the next validator
 // method. This can be used to negate the check performed by the next validation
@@ -76,10 +60,7 @@ func (validator *ValidatorTime) Context() *ValidatorContext {
 //	// Will return false because Not() inverts the boolean value of the Zero() function
 //	startTime := time.Now()
 //	Is(v.Time(startTime).Not().Zero()).Valid()
-func (validator *ValidatorTime) Not() *ValidatorTime {
-	validator.context.Not()
-	return validator
-}
+func (validator *ValidatorTime) Not() *ValidatorTime { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -91,10 +72,7 @@ func (validator *ValidatorTime) Not() *ValidatorTime {
 //	// This validator will pass because the time is before or equal to time.Now().
 //	t := time.Now()
 //	isValid := v.Is(v.Time(t).Zero().Or().BeforeOrEqualTo(time.Now())).Valid()
-func (validator *ValidatorTime) Or() *ValidatorTime {
-	validator.context.Or()
-	return validator
-}
+func (validator *ValidatorTime) Or() *ValidatorTime { _ = "STUB: not implemented"; return nil }
 
 // The EqualTo method validates if the time value is equal to another given time
 // value. It uses the equality (`==`) operator from Go for the comparison.
@@ -105,13 +83,8 @@ func (validator *ValidatorTime) Or() *ValidatorTime {
 //	timeB := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
 //	Is(v.Time(timeA).EqualTo(timeB)).Valid()
 func (validator *ValidatorTime) EqualTo(value time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeEqualTo(validator.context.Value().(time.Time), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The After method checks if the time value is after a specified time.
@@ -122,13 +95,8 @@ func (validator *ValidatorTime) EqualTo(value time.Time, template ...string) *Va
 //	endTime := time.Date(2023, 1, 1, 1, 0, 0, 0, time.UTC)
 //	Is(v.Time(endTime).After(startTime)).Valid()
 func (validator *ValidatorTime) After(value time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeAfter(validator.context.Value().(time.Time), value)
-		},
-		ErrorKeyAfter, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The AfterOrEqualTo method checks if the time value is either after or equal to
@@ -140,13 +108,8 @@ func (validator *ValidatorTime) After(value time.Time, template ...string) *Vali
 //	timeB := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
 //	Is(v.Time(timeA).AfterOrEqualTo(timeB)).Valid()
 func (validator *ValidatorTime) AfterOrEqualTo(value time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeAfterOrEqualTo(validator.context.Value().(time.Time), value)
-		},
-		ErrorKeyAfterOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The Before method checks if the time value is before a specified time.
@@ -157,13 +120,8 @@ func (validator *ValidatorTime) AfterOrEqualTo(value time.Time, template ...stri
 //	endTime := time.Date(2023, 1, 1, 1, 0, 0, 0, time.UTC)
 //	Is(v.Time(startTime).Before(endTime)).Valid()
 func (validator *ValidatorTime) Before(value time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeBefore(validator.context.Value().(time.Time), value)
-		},
-		ErrorKeyBefore, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The BeforeOrEqualTo method checks if the time value is either before or equal to
@@ -175,13 +133,8 @@ func (validator *ValidatorTime) Before(value time.Time, template ...string) *Val
 //	timeB := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
 //	Is(v.Time(timeA).BeforeOrEqualTo(timeB)).Valid()
 func (validator *ValidatorTime) BeforeOrEqualTo(value time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeBeforeOrEqualTo(validator.context.Value().(time.Time), value)
-		},
-		ErrorKeyBeforeOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The Between method verifies if the time value falls within a given time range, inclusive.
@@ -193,15 +146,8 @@ func (validator *ValidatorTime) BeforeOrEqualTo(value time.Time, template ...str
 //	checkTime := time.Date(2023, 1, 1, 6, 0, 0, 0, time.UTC)
 //	Is(v.Time(checkTime).Between(minTime, maxTime)).Valid()
 func (validator *ValidatorTime) Between(min time.Time, max time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithParams(
-		func() bool {
-			return isTimeBetween(validator.context.Value().(time.Time), min, max)
-		},
-		ErrorKeyBetween,
-		map[string]any{"title": validator.context.title, "min": min, "max": max},
-		template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The Zero method verifies if the time value is a zero time, which means it hasn't
@@ -212,13 +158,8 @@ func (validator *ValidatorTime) Between(min time.Time, max time.Time, template .
 //	zeroTime := time.Time{}
 //	Is(v.Time(zeroTime).Zero()).Valid()
 func (validator *ValidatorTime) Zero(template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeZero(validator.context.Value().(time.Time))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The Passing method allows for custom validation logic by accepting a function
@@ -231,13 +172,8 @@ func (validator *ValidatorTime) Zero(template ...string) *ValidatorTime {
 //	    return t.Year() == 2023
 //	})).Valid()
 func (validator *ValidatorTime) Passing(function func(v0 time.Time) bool, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(time.Time))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // The InSlice method validates if the time value is found within a provided slice
@@ -251,11 +187,6 @@ func (validator *ValidatorTime) Passing(function func(v0 time.Time) bool, templa
 //	checkTime := time.Date(2023, 1, 1, 1, 0, 0, 0, time.UTC)
 //	Is(v.Time(checkTime).InSlice(timeSlice)).Valid()
 func (validator *ValidatorTime) InSlice(slice []time.Time, template ...string) *ValidatorTime {
-	validator.context.AddWithValue(
-		func() bool {
-			return isTimeInSlice(validator.context.Value().(time.Time), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

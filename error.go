@@ -1,12 +1,5 @@
 package valgo
 
-import (
-	"encoding/json"
-	"fmt"
-
-	"github.com/valyala/fasttemplate"
-)
-
 // Implementation of the Go error interface in Valgo. The [Validation.Error()]
 // method returns a value of this type.
 //
@@ -37,113 +30,55 @@ type valueError struct {
 
 // The title of the invalid field value.
 func (ve *valueError) Title() string {
+	_ = "STUB: not implemented"
 	// Lazy load the title
-	if ve.title == nil {
-		return humanizeName(*ve.name)
-	}
-	return *ve.title
+	return ""
 }
 
 // The name of the invalid field value.
 func (ve *valueError) Name() string {
-	return *ve.name
+	_ = "STUB: not implemented"
+
+	// Error messages related to an invalid field value.
+	return ""
 }
 
-// Error messages related to an invalid field value.
-func (ve *valueError) Messages() []string {
-	if ve.dirty {
-		ve.messages = []string{}
-		for _, et := range ve.errorTemplates {
-			ve.messages = append(ve.messages, ve.buildMessageFromTemplate(et))
-		}
-
-		ve.messages = append(ve.messages, ve.errorMessages...)
-
-		ve.dirty = false
-	}
-
-	return ve.messages
-}
+func (ve *valueError) Messages() []string { _ = "STUB: not implemented"; return nil }
 
 func (ve *valueError) buildMessageFromTemplate(et *errorTemplate) string {
-
-	var ts string
-	if et.template != nil {
-		ts = *et.template
-	} else if _ts, ok := (*ve.validator._locale)[et.key]; ok {
-		ts = _ts
-	} else {
-		ts = concatString("ERROR: THERE IS NOT A MESSAGE WITH THE KEY: ", et.key)
-	}
-
-	var title string
-	if ve.title == nil {
-		title = humanizeName(*ve.name)
-	} else {
-		title = *ve.title
-	}
-
-	et.params["name"] = *ve.name
-	et.params["title"] = title
-
-	t := fasttemplate.New(ts, "{{", "}}")
-
-	// Ensure interface{} values are string in order to be handle by fasttemplate
-	for k, v := range et.params {
-		if k != "name" && k != "title" {
-			et.params[k] = fmt.Sprintf("%v", v)
-		}
-	}
-
-	return t.ExecuteString(et.params)
+	_ = "STUB: not implemented"
+	return ""
 }
+
+// Ensure interface{} values are string in order to be handle by fasttemplate
 
 // Return the error message associated with a Valgo error.
-func (e *Error) Error() string {
-	count := len(e.errors)
-	if count == 1 {
-		return fmt.Sprintf("There is 1 error")
-	} else {
-		return fmt.Sprintf("There are %v errors", count)
-	}
-}
+func (e *Error) Error() string { _ = "STUB: not implemented"; return "" }
 
 // Return a map with each Invalid value error.
-func (e *Error) Errors() map[string]*valueError {
-	return e.errors
-}
+func (e *Error) Errors() map[string]*valueError { _ = "STUB: not implemented"; return nil }
 
 func (e *Error) prepareErrorsForMarshal() map[string]interface{} {
-	errors := map[string]interface{}{}
-	for k, v := range e.errors {
-		errors[k] = v.Messages()
-	}
-	return errors
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Returns the JSON encoding of the validation error messages.
 //
 // A custom function can be set either by passing it as a parameter to
 // [validation.Error()] or through [FactoryOptions].
-func (e *Error) MarshalJSON() ([]byte, error) {
-	if e.marshalJsonFunc != nil {
-		return e.marshalJsonFunc(e)
-	} else {
-		return json.Marshal(e.prepareErrorsForMarshal())
-	}
-}
+func (e *Error) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // Returns the JSON encoding of the validation error messages with the given prefix and indent.
 //
 // This function does not call a custom marshalJsonFunc function if it is set.
 func (e *Error) MarshalJSONIndent(prefix, indent string) ([]byte, error) {
-	return json.MarshalIndent(e.prepareErrorsForMarshal(), prefix, indent)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Returns the JSON encoding of the validation error messages with the pretty format.
 //
 // This is a shortcut for MarshalJSONIndent("", "  ").
 // It does not call a custom marshalJSONFunc function if it is set.
-func (e *Error) MarshalJSONPretty() ([]byte, error) {
-	return json.MarshalIndent(e.prepareErrorsForMarshal(), "", "  ")
-}
+func (e *Error) MarshalJSONPretty() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }

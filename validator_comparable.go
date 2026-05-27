@@ -19,23 +19,26 @@ type ValidatorComparable[T comparable] struct {
 //
 //	v.Is(v.Comparable(user).Not().Nil())
 func Comparable[T comparable](value T, nameAndTitle ...string) *ValidatorComparable[T] {
-	return &ValidatorComparable[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorComparable[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because `Not()` inverts the boolean value associated with `EqualTo()`
+	//	v.Is(v.Comparable("a").Not().EqualTo("a")).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because `Not()` inverts the boolean value associated with `EqualTo()`
-//	v.Is(v.Comparable("a").Not().EqualTo("a")).Valid()
 func (validator *ValidatorComparable[T]) Not() *ValidatorComparable[T] {
-	validator.context.Not()
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
@@ -49,8 +52,8 @@ func (validator *ValidatorComparable[T]) Not() *ValidatorComparable[T] {
 //	status := "running"
 //	isValid := v.Is(v.Comparable(status).EqualTo("paused").Or().EqualTo("running")).Valid()
 func (validator *ValidatorComparable[T]) Or() *ValidatorComparable[T] {
-	validator.context.Or()
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value is equal to another. This function internally uses
@@ -60,13 +63,8 @@ func (validator *ValidatorComparable[T]) Or() *ValidatorComparable[T] {
 //	status := "running"
 //	Is(v.Comparable(status).EqualTo("running"))
 func (validator *ValidatorComparable[T]) EqualTo(value T, template ...string) *ValidatorComparable[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value() == value
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a value passes a custom function.
@@ -82,15 +80,11 @@ func (validator *ValidatorComparable[T]) EqualTo(value T, template ...string) *V
 //	  }),
 //	).Valid()
 func (validator *ValidatorComparable[T]) Passing(function func(v T) bool, template ...string) *ValidatorComparable[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			// Value is stored as interface{} inside the context; assert back to T.
-			return function(validator.context.Value().(T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// Value is stored as interface{} inside the context; assert back to T.
 
 // Validate if a value is present in a slice.
 // For example:
@@ -99,17 +93,6 @@ func (validator *ValidatorComparable[T]) Passing(function func(v T) bool, templa
 //	validStatus := []string{"idle", "paused", "stopped"}
 //	Is(v.Comparable(status).InSlice(validStatus))
 func (validator *ValidatorComparable[T]) InSlice(slice []T, template ...string) *ValidatorComparable[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			v := validator.context.Value().(T)
-			for _, s := range slice {
-				if v == s {
-					return true
-				}
-			}
-			return false
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

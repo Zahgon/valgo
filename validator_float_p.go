@@ -1,7 +1,5 @@
 package valgo
 
-import "math"
-
 // The [ValidatorFloatP] provides functions for setting validation rules for a
 // float pointer value types, or a custom type based on a float32 or float64 pointer.
 type ValidatorFloatP[T ~float32 | ~float64] struct {
@@ -19,7 +17,8 @@ type ValidatorFloatP[T ~float32 | ~float64] struct {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Float32P[T ~float32](value *T, nameAndTitle ...string) *ValidatorFloatP[T] {
-	return &ValidatorFloatP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives a float64 pointer value to validate.
@@ -33,25 +32,27 @@ func Float32P[T ~float32](value *T, nameAndTitle ...string) *ValidatorFloatP[T] 
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Float64P[T ~float64](value *T, nameAndTitle ...string) *ValidatorFloatP[T] {
-	return &ValidatorFloatP[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorFloatP[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because Not() inverts the boolean value associated with the Zero() function
+	//	n := float32(0)
+	//	Is(v.Float32P(&n).Not().Zero()).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because Not() inverts the boolean value associated with the Zero() function
-//	n := float32(0)
-//	Is(v.Float32P(&n).Not().Zero()).Valid()
 func (validator *ValidatorFloatP[T]) Not() *ValidatorFloatP[T] {
-	validator.context.Not()
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
@@ -65,9 +66,8 @@ func (validator *ValidatorFloatP[T]) Not() *ValidatorFloatP[T] {
 //	input := float32(0)
 //	isValid := v.Is(v.Float32P(&input).GreaterThan(5).Or().Zero()).Valid()
 func (validator *ValidatorFloatP[T]) Or() *ValidatorFloatP[T] {
-	validator.context.Or()
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is equal to another. This function internally uses
@@ -77,13 +77,8 @@ func (validator *ValidatorFloatP[T]) Or() *ValidatorFloatP[T] {
 //	quantity := float32(2)
 //	Is(v.Float32P(&quantity).EqualTo(2))
 func (validator *ValidatorFloatP[T]) EqualTo(value T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberEqualTo(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than another. This function internally
@@ -93,13 +88,8 @@ func (validator *ValidatorFloatP[T]) EqualTo(value T, template ...string) *Valid
 //	quantity := float32(3)
 //	Is(v.Float32P(&quantity).GreaterThan(2))
 func (validator *ValidatorFloatP[T]) GreaterThan(value T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberGreaterThan(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyGreaterThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than or equal to another. This function
@@ -109,13 +99,8 @@ func (validator *ValidatorFloatP[T]) GreaterThan(value T, template ...string) *V
 //	quantity := float32(3)
 //	Is(v.Float32P(&quantity).GreaterOrEqualTo(3))
 func (validator *ValidatorFloatP[T]) GreaterOrEqualTo(value T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberGreaterOrEqualTo(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyGreaterOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than another. This function internally
@@ -125,13 +110,8 @@ func (validator *ValidatorFloatP[T]) GreaterOrEqualTo(value T, template ...strin
 //	quantity := float32(2)
 //	Is(v.Float32P(&quantity).LessThan(3))
 func (validator *ValidatorFloatP[T]) LessThan(value T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberLessThan(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyLessThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than or equal to another. This function
@@ -141,13 +121,8 @@ func (validator *ValidatorFloatP[T]) LessThan(value T, template ...string) *Vali
 //	quantity := float32(2)
 //	Is(v.Float32P(&quantity).LessOrEqualTo(2))
 func (validator *ValidatorFloatP[T]) LessOrEqualTo(value T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberLessOrEqualTo(*(validator.context.Value().(*T)), value)
-		},
-		ErrorKeyLessOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is within a range (inclusive).
@@ -156,15 +131,8 @@ func (validator *ValidatorFloatP[T]) LessOrEqualTo(value T, template ...string) 
 //	n := float32(3)
 //	Is(v.Float32P(&n).Between(2,6))
 func (validator *ValidatorFloatP[T]) Between(min T, max T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithParams(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberBetween(*(validator.context.Value().(*T)), min, max)
-		},
-		ErrorKeyBetween,
-		map[string]any{"title": validator.context.title, "min": min, "max": max, "value": validator.context.Value()},
-		template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is zero.
@@ -174,13 +142,8 @@ func (validator *ValidatorFloatP[T]) Between(min T, max T, template ...string) *
 //	n := float32(0)
 //	Is(v.Float32P(&n).Zero())
 func (validator *ValidatorFloatP[T]) Zero(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberZero(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value passes a custom function.
@@ -191,13 +154,8 @@ func (validator *ValidatorFloatP[T]) Zero(template ...string) *ValidatorFloatP[T
 //		return *v == getAllowedQuantity()
 //	})
 func (validator *ValidatorFloatP[T]) Passing(function func(v *T) bool, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(*T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is present in a numeric slice.
@@ -207,13 +165,8 @@ func (validator *ValidatorFloatP[T]) Passing(function func(v *T) bool, template 
 //	validQuantities := []float32{1,3,5}
 //	Is(v.Float32P(&quantity).InSlice(validQuantities))
 func (validator *ValidatorFloatP[T]) InSlice(slice []T, template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && isNumberInSlice(*(validator.context.Value().(*T)), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric pointer value is nil.
@@ -223,13 +176,8 @@ func (validator *ValidatorFloatP[T]) InSlice(slice []T, template ...string) *Val
 //	var n *float32
 //	Is(v.Float32P(n).Nil())
 func (validator *ValidatorFloatP[T]) Nil(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) == nil
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is zero or nil.
@@ -242,13 +190,8 @@ func (validator *ValidatorFloatP[T]) Nil(template ...string) *ValidatorFloatP[T]
 //	var n *float32
 //	Is(v.Float32P(n).ZeroOrNil())
 func (validator *ValidatorFloatP[T]) ZeroOrNil(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) == nil || isNumberZero(*(validator.context.Value().(*T)))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is positive (greater than zero).
@@ -258,13 +201,8 @@ func (validator *ValidatorFloatP[T]) ZeroOrNil(template ...string) *ValidatorFlo
 //	n := float32(5.5)
 //	Is(v.Float32P(&n).Positive())
 func (validator *ValidatorFloatP[T]) Positive(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && *(validator.context.Value().(*T)) > 0
-		},
-		ErrorKeyPositive, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is negative (less than zero).
@@ -274,13 +212,8 @@ func (validator *ValidatorFloatP[T]) Positive(template ...string) *ValidatorFloa
 //	n := float32(-5.5)
 //	Is(v.Float32P(&n).Negative())
 func (validator *ValidatorFloatP[T]) Negative(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && *(validator.context.Value().(*T)) < 0
-		},
-		ErrorKeyNegative, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is NaN (Not a Number).
@@ -290,13 +223,8 @@ func (validator *ValidatorFloatP[T]) Negative(template ...string) *ValidatorFloa
 //	n := float32(math.NaN())
 //	Is(v.Float32P(&n).NaN())
 func (validator *ValidatorFloatP[T]) NaN(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && math.IsNaN(float64(*(validator.context.Value().(*T))))
-		},
-		ErrorKeyNaN, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is infinite (positive or negative infinity).
@@ -306,13 +234,8 @@ func (validator *ValidatorFloatP[T]) NaN(template ...string) *ValidatorFloatP[T]
 //	n := float32(math.Inf(1))
 //	Is(v.Float32P(&n).Infinite())
 func (validator *ValidatorFloatP[T]) Infinite(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && math.IsInf(float64(*(validator.context.Value().(*T))), 0)
-		},
-		ErrorKeyInfinite, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is finite (not NaN and not infinite).
@@ -322,11 +245,6 @@ func (validator *ValidatorFloatP[T]) Infinite(template ...string) *ValidatorFloa
 //	n := float32(3.14)
 //	Is(v.Float32P(&n).Finite())
 func (validator *ValidatorFloatP[T]) Finite(template ...string) *ValidatorFloatP[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(*T) != nil && !math.IsNaN(float64(*(validator.context.Value().(*T)))) && !math.IsInf(float64(*(validator.context.Value().(*T))), 0)
-		},
-		ErrorKeyFinite, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }

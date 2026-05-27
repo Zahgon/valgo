@@ -1,7 +1,5 @@
 package valgo
 
-import "reflect"
-
 // The Typed validator's type that keeps its validator context.
 // T can be any Go type (pointer, struct, slice, map, etc.).
 type ValidatorTyped[T any] struct {
@@ -21,24 +19,24 @@ type ValidatorTyped[T any] struct {
 //
 //	v.Is(v.Typed(user).Not().Nil())
 func Typed[T any](value T, nameAndTitle ...string) *ValidatorTyped[T] {
-	return &ValidatorTyped[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorTyped[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because `Not()` inverts the boolean value associated with `EqualTo()`
+	//	v.Is(v.Typed("a").Not().EqualTo("a")).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because `Not()` inverts the boolean value associated with `EqualTo()`
-//	v.Is(v.Typed("a").Not().EqualTo("a")).Valid()
-func (validator *ValidatorTyped[T]) Not() *ValidatorTyped[T] {
-	validator.context.Not()
-	return validator
-}
+func (validator *ValidatorTyped[T]) Not() *ValidatorTyped[T] { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -50,10 +48,7 @@ func (validator *ValidatorTyped[T]) Not() *ValidatorTyped[T] {
 //	// This validator will pass because the string is equals "test".
 //	input := "test"
 //	isValid := v.Is(v.String(input).MinLength(5).Or().EqualTo("test")).Valid()
-func (validator *ValidatorTyped[T]) Or() *ValidatorTyped[T] {
-	validator.context.Or()
-	return validator
-}
+func (validator *ValidatorTyped[T]) Or() *ValidatorTyped[T] { _ = "STUB: not implemented"; return nil }
 
 // Validate if a value passes a custom function.
 // The function receives a typed T value, enabling compile-time type safety.
@@ -68,15 +63,11 @@ func (validator *ValidatorTyped[T]) Or() *ValidatorTyped[T] {
 //	  }),
 //	).Valid()
 func (validator *ValidatorTyped[T]) Passing(function func(v T) bool, template ...string) *ValidatorTyped[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			// Value is stored as interface{} inside the context; assert back to T.
-			return function(validator.context.Value().(T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// Value is stored as interface{} inside the context; assert back to T.
 
 // Validate if a value is nil.
 // Works for nil-able kinds: pointers, slices, maps, chans, funcs, and interfaces.
@@ -87,16 +78,10 @@ func (validator *ValidatorTyped[T]) Passing(function func(v T) bool, template ..
 //	var s *string
 //	v.Is(v.Typed(s).Nil())
 func (validator *ValidatorTyped[T]) Nil(template ...string) *ValidatorTyped[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			val := validator.context.Value()
-			// In Golang nil sometimes is not equal to raw nil, such as it's explained
-			// here: https://dev.to/arxeiss/in-go-nil-is-not-equal-to-nil-sometimes-jn8
-			// So, seems using reflection is the only option here
-			return val == nil ||
-				(reflect.ValueOf(val).Kind() == reflect.Ptr && reflect.ValueOf(val).IsNil())
-		},
-		ErrorKeyNil, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// In Golang nil sometimes is not equal to raw nil, such as it's explained
+// here: https://dev.to/arxeiss/in-go-nil-is-not-equal-to-nil-sometimes-jn8
+// So, seems using reflection is the only option here

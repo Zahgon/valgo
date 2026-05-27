@@ -1,7 +1,5 @@
 package valgo
 
-import "math"
-
 // The [ValidatorFloat] provides functions for setting validation rules for a
 // float value types, or a custom type based on a float32 or float64.
 type ValidatorFloat[T ~float32 | ~float64] struct {
@@ -19,7 +17,8 @@ type ValidatorFloat[T ~float32 | ~float64] struct {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Float32[T ~float32](value T, nameAndTitle ...string) *ValidatorFloat[T] {
-	return &ValidatorFloat[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Receives a float64 value to validate.
@@ -33,25 +32,24 @@ func Float32[T ~float32](value T, nameAndTitle ...string) *ValidatorFloat[T] {
 // used as the title as well; for example the name `phone_number` will be
 // humanized as `Phone Number`
 func Float64[T ~float64](value T, nameAndTitle ...string) *ValidatorFloat[T] {
-	return &ValidatorFloat[T]{context: NewContext(value, nameAndTitle...)}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Return the context of the validator. The context is useful to create a custom
 // validator by extending this validator.
 func (validator *ValidatorFloat[T]) Context() *ValidatorContext {
-	return validator.context
+	_ = "STUB: not implemented"
+	return nil
+
+	// Invert the logical value associated with the next validator function.
+	// For example:
+	//
+	//	// It will return false because Not() inverts the boolean value associated with the Zero() function
+	//	Is(v.Float32(0).Not().Zero()).Valid()
 }
 
-// Invert the logical value associated with the next validator function.
-// For example:
-//
-//	// It will return false because Not() inverts the boolean value associated with the Zero() function
-//	Is(v.Float32(0).Not().Zero()).Valid()
-func (validator *ValidatorFloat[T]) Not() *ValidatorFloat[T] {
-	validator.context.Not()
-
-	return validator
-}
+func (validator *ValidatorFloat[T]) Not() *ValidatorFloat[T] { _ = "STUB: not implemented"; return nil }
 
 // Introduces a logical OR in the chain of validation conditions, affecting the
 // evaluation order and priority of subsequent validators. A value passes the
@@ -63,11 +61,7 @@ func (validator *ValidatorFloat[T]) Not() *ValidatorFloat[T] {
 //	// This validator will pass because the input is Zero.
 //	input := float32(0)
 //	isValid := v.Is(v.Float32(input).GreaterThan(5).Or().Zero()).Valid()
-func (validator *ValidatorFloat[T]) Or() *ValidatorFloat[T] {
-	validator.context.Or()
-
-	return validator
-}
+func (validator *ValidatorFloat[T]) Or() *ValidatorFloat[T] { _ = "STUB: not implemented"; return nil }
 
 // Validate if a numeric value is equal to another. This function internally uses
 // the golang `==` operator.
@@ -76,13 +70,8 @@ func (validator *ValidatorFloat[T]) Or() *ValidatorFloat[T] {
 //	quantity := float32(2)
 //	Is(v.Float32(quantity).EqualTo(2))
 func (validator *ValidatorFloat[T]) EqualTo(value T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberEqualTo(validator.context.Value().(T), value)
-		},
-		ErrorKeyEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than another. This function internally
@@ -92,13 +81,8 @@ func (validator *ValidatorFloat[T]) EqualTo(value T, template ...string) *Valida
 //	quantity := float32(3)
 //	Is(v.Float32(quantity).GreaterThan(2))
 func (validator *ValidatorFloat[T]) GreaterThan(value T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberGreaterThan(validator.context.Value().(T), value)
-		},
-		ErrorKeyGreaterThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is greater than or equal to another. This function
@@ -108,13 +92,8 @@ func (validator *ValidatorFloat[T]) GreaterThan(value T, template ...string) *Va
 //	quantity := float32(3)
 //	Is(v.Float32(quantity).GreaterOrEqualTo(3))
 func (validator *ValidatorFloat[T]) GreaterOrEqualTo(value T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberGreaterOrEqualTo(validator.context.Value().(T), value)
-		},
-		ErrorKeyGreaterOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than another. This function internally
@@ -124,13 +103,8 @@ func (validator *ValidatorFloat[T]) GreaterOrEqualTo(value T, template ...string
 //	quantity := float32(2)
 //	Is(v.Float32(quantity).LessThan(3))
 func (validator *ValidatorFloat[T]) LessThan(value T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberLessThan(validator.context.Value().(T), value)
-		},
-		ErrorKeyLessThan, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is less than or equal to another. This function
@@ -140,13 +114,8 @@ func (validator *ValidatorFloat[T]) LessThan(value T, template ...string) *Valid
 //	quantity := float32(2)
 //	Is(v.Float32(quantity).LessOrEqualTo(2))
 func (validator *ValidatorFloat[T]) LessOrEqualTo(value T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberLessOrEqualTo(validator.context.Value().(T), value)
-		},
-		ErrorKeyLessOrEqualTo, value, template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is within a range (inclusive).
@@ -154,15 +123,8 @@ func (validator *ValidatorFloat[T]) LessOrEqualTo(value T, template ...string) *
 //
 //	Is(v.Float32(3).Between(2,6))
 func (validator *ValidatorFloat[T]) Between(min T, max T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithParams(
-		func() bool {
-			return isNumberBetween(validator.context.Value().(T), min, max)
-		},
-		ErrorKeyBetween,
-		map[string]any{"title": validator.context.title, "min": min, "max": max, "value": validator.context.Value()},
-		template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is zero.
@@ -171,13 +133,8 @@ func (validator *ValidatorFloat[T]) Between(min T, max T, template ...string) *V
 //
 //	Is(v.Float32(0).Zero())
 func (validator *ValidatorFloat[T]) Zero(template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberZero(validator.context.Value().(T))
-		},
-		ErrorKeyZero, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is positive (greater than zero).
@@ -186,13 +143,8 @@ func (validator *ValidatorFloat[T]) Zero(template ...string) *ValidatorFloat[T] 
 //
 //	Is(v.Float32(5.5).Positive())
 func (validator *ValidatorFloat[T]) Positive(template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(T) > 0
-		},
-		ErrorKeyPositive, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is negative (less than zero).
@@ -201,13 +153,8 @@ func (validator *ValidatorFloat[T]) Positive(template ...string) *ValidatorFloat
 //
 //	Is(v.Float32(-5.5).Negative())
 func (validator *ValidatorFloat[T]) Negative(template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return validator.context.Value().(T) < 0
-		},
-		ErrorKeyNegative, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value passes a custom function.
@@ -218,13 +165,8 @@ func (validator *ValidatorFloat[T]) Negative(template ...string) *ValidatorFloat
 //		return v == getAllowedQuantity()
 //	})
 func (validator *ValidatorFloat[T]) Passing(function func(v T) bool, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return function(validator.context.Value().(T))
-		},
-		ErrorKeyPassing, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a number is present in a numeric slice.
@@ -234,13 +176,8 @@ func (validator *ValidatorFloat[T]) Passing(function func(v T) bool, template ..
 //	validQuantities := []float32{1,3,5}
 //	Is(v.Float32(quantity).InSlice(validQuantities))
 func (validator *ValidatorFloat[T]) InSlice(slice []T, template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return isNumberInSlice(validator.context.Value().(T), slice)
-		},
-		ErrorKeyInSlice, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is NaN (Not a Number).
@@ -249,13 +186,8 @@ func (validator *ValidatorFloat[T]) InSlice(slice []T, template ...string) *Vali
 //
 //	Is(v.Float32(math.NaN()).NaN())
 func (validator *ValidatorFloat[T]) NaN(template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return math.IsNaN(float64(validator.context.Value().(T)))
-		},
-		ErrorKeyNaN, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is infinite (positive or negative infinity).
@@ -264,13 +196,8 @@ func (validator *ValidatorFloat[T]) NaN(template ...string) *ValidatorFloat[T] {
 //
 //	Is(v.Float32(math.Inf(1)).Infinite())
 func (validator *ValidatorFloat[T]) Infinite(template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return math.IsInf(float64(validator.context.Value().(T)), 0)
-		},
-		ErrorKeyInfinite, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Validate if a numeric value is finite (not NaN and not infinite).
@@ -279,11 +206,6 @@ func (validator *ValidatorFloat[T]) Infinite(template ...string) *ValidatorFloat
 //
 //	Is(v.Float32(3.14).Finite())
 func (validator *ValidatorFloat[T]) Finite(template ...string) *ValidatorFloat[T] {
-	validator.context.AddWithValue(
-		func() bool {
-			return !math.IsNaN(float64(validator.context.Value().(T))) && !math.IsInf(float64(validator.context.Value().(T)), 0)
-		},
-		ErrorKeyFinite, validator.context.Value(), template...)
-
-	return validator
+	_ = "STUB: not implemented"
+	return nil
 }
